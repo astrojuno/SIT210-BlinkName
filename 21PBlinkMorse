@@ -1,0 +1,339 @@
+// SIT210 2.1P
+// [student details withheld]
+
+/*
+This code is modified from the example code in 'Blink and LED' available at particle.io
+
+It has been modified to blink a name in morse code.
+
+Short blinks are dots, long blinks are dashes.
+
+There are some parameters you can change, which are clearly marked. 
+
+This programs limitations are: 
+- Only A-Z is available
+*/
+
+// YOU CAN CHANGE THESE
+// This is the name we will blink in morse code. You can change it to your name if you like...
+String name = "John";
+
+// All these times here are in milli seconds, so 500 is half a second and 1000 is a second.
+// According to https://morsecode.world/international/timing.html, a dot should be 1 unit, a dash 3 units, a break between dot and dash
+// in a letter 1 unit, the break between letters is 3 units, and the break between words is 7 units.
+// Here we set the length of 1 unit in milliseconds
+int oneUnit = 300;
+
+// This is how long the LED will light for a dot
+int dot = oneUnit;
+
+// This is how long the LED will light for a dash
+int dash = 3 * oneUnit;
+
+// This is the pause between dots and dashes. You can change it if you like...
+int pauseMidLetterMilli = oneUnit;
+
+// This is the delay between letters. You can change this too...
+int pauseAfterLetterMilli = 3 * oneUnit;
+
+// This is the break between cycles. The program will blink out the name, then wait this long before repeating.
+// You can change this too!
+int pauseAfterWordMilli = 7 * oneUnit;
+
+// YOU SHOULD NOT CHANGE ANYTHING BELOW HERE
+
+
+// D7 is the LED we will be blinking
+int led = D7; 
+
+// Setup runs once at the beginning to setup the program
+void setup() {
+
+    // Set the led pin as an output
+    // This means we will use it to output a signal. Since D7 is hardwired to the LED, this will light the LED.
+    pinMode(led, OUTPUT);
+    
+}
+
+
+// This is the loop function. It will execute in a loop after the setup function runs.
+void loop() {
+    // Make sure the LED is off to start
+    digitalWrite(led, LOW);
+    
+    // We'll iterate over the letters in 'name'
+    for (int i = 0; i < name.length(); i++) {
+        // for each letter, we'll send it off to the function BlinkMorse()
+        BlinkMorseForLetter(name[i]);
+    }
+    
+    // make sure the LED is off at the end
+    digitalWrite(led, LOW);
+    
+    // break until the next repeat
+    delay(pauseAfterWordMilli);
+}
+
+/****************************************************
+ * Name: BlinkMorseForLetter                        *
+ * Parameters: c (char)                             *
+ * Returns: void                                    *
+ *                                                  *
+ * Purpose: Takes a character and blinks the led    *
+ * with the correct morse code sequence.            *
+ * *************************************************/
+ void BlinkMorseForLetter(char c) {
+     // convert the character to lowercase
+     c = tolower(c);
+     
+     // switch on the letter, and blink the appropriate sequence.
+     switch(c) {
+        case 'a': 
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'b': 
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'c': 
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'd':
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'e':
+            BlinkDot();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'f': 
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'g':
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'h': 
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'i':
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'j':
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'k':
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'l':
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'm': 
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'n':
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'o':
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'p':
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'q': 
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'r':
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 's':
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 't':
+            BlinkDash();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'u':
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'v': 
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'w':
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'x': 
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'y': 
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseAfterLetterMilli);
+            break;
+        case 'z':
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDash();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseMidLetterMilli);
+            BlinkDot();
+            delay(pauseAfterLetterMilli);
+            break;
+        default: 
+            // if we made it here, it wasn't an a-z letter.
+            break;
+     }
+ }
+ 
+ /****************************************************
+ * Name: BlinkDot                                    *
+ * Parameters: None                                  *
+ * Returns: void                                     *
+ *                                                   *
+ * Purpose: links the led for a dot                  *
+ * with the correct morse code sequence.             *
+ * **************************************************/
+ void BlinkDot() {
+    digitalWrite(led, HIGH);
+    delay(dot);
+    digitalWrite(led, LOW);
+}
+
+/****************************************************
+ * Name: BlinkDash                                   *
+ * Parameters: None                                  *
+ * Returns: void                                     *
+ *                                                   *
+ * Purpose: links the led for a dash                 *
+ * with the correct morse code sequence.             *
+ * **************************************************/
+ void BlinkDash() {
+    digitalWrite(led, HIGH);
+    delay(dash);
+    digitalWrite(led, LOW);
+}
+
+
